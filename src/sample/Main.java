@@ -58,16 +58,16 @@ public class Main extends Application {
         return String.format("%d x %.2f€ TOTAL: %.2f€", units.get(box), price.get(box), total.get(box));
     }
 
-    void setPrice(HashMap<VBox,HBox> mapa, String cadena, VBox index) {
-        ((Text)((VBox)mapa.get(index).getChildren().get(1)).getChildren().get(1)).setText(cadena);
+    void setPrice(HashMap<VBox,HBox> map, String text, VBox index) {
+        ((Text)((VBox)map.get(index).getChildren().get(1)).getChildren().get(1)).setText(text);
     }
 
-    void increasePrice(VBox box, FlowPane pane, HashMap<VBox,Double> mapa) {
+    void increasePrice(VBox box, FlowPane pane, HashMap<VBox,Double> map) {
         if (stock.get(box) > 0) {
             units.put(box, units.get(box) + 1);
             stock.put(box, stock.get(box) - 1);
             total.put(box, units.get(box) * price.get(box));
-            setPayment(pane,mapa,1);
+            setPayment(pane,map,1);
         }
     }
 
@@ -75,7 +75,7 @@ public class Main extends Application {
         units.put(box, Integer.parseInt(num));
         total.put(box, units.get(box) * price.get(box));
         pane.getChildren().remove(pane.getChildren().size()-1);
-        pane.getChildren().add(new Text(String.format("Precio total: %.2f€", fill(total))));
+        pane.getChildren().add(new Text(String.format("Total price: %.2f€", fill(total))));
         setPrice(windows,genTotal(box),box);
     }
 
